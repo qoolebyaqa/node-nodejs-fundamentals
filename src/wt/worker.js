@@ -1,9 +1,8 @@
-import { parentPort } from 'worker_threads';
+import { parentPort, workerData } from 'worker_threads';
 
-// Receive array from main thread
-// Sort in ascending order
-// Send back to main thread
+function sortNumbers(numbers) {
+  return numbers.slice().sort((a, b) => a - b);
+}
 
-parentPort.on('message', (data) => {
-  // Write your code here
-});
+const sorted = sortNumbers(workerData);
+parentPort.postMessage(sorted);
